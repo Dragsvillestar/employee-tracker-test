@@ -1,0 +1,305 @@
+body,html{
+    height: 100%;
+    width: 100%;
+}
+
+.parent,.row{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0%;
+}
+.content{
+    height: 90%;
+    width: 80%;;
+    margin: auto;
+}
+
+#welcome-message {
+    width: 80%; /* Occupy 80% of the width */
+    font-size: 2em; /* Larger text */
+    color: #6A5ACD; /* Violet blue */
+    font-family: 'Press Start 2P', fantasy; /* Fantasy font */
+    text-align: center;
+    line-height: 1.2; /* Adjust spacing */
+    font-weight: bold;
+}
+
+.clock-info {
+    margin-top: 20px;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
+}
+
+.clock-space {
+    display: inline-block;
+    width: 150px; /* Space for time to be added dynamically */
+    height: 30px;
+    border-bottom: 2px solid #000; /* Creates a space-like underline */
+    margin-left: 10px;
+}
+
+#clock-in-btn {
+    display: block;
+    width: 200px;
+    padding: 10px;
+    font-size: 18px;
+    color: white;
+    background: #6A5ACD;
+    border: none;
+    border-radius: 8px;
+    margin: 20px auto;
+    cursor: pointer;
+    font-family: 'Press Start 2P', fantasy;
+}
+
+.leaflet-control-attribution {
+    display: none !important;
+}
+
+#right-side {
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.profile-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    text-align: left; /* 🔥 Text starts from the left */
+}
+
+/* User Name */
+.profile-card h2 {
+    font-size: 32px;  /* 🔥 Even Bigger Name */
+    color: #222;
+    margin-bottom: 20px;
+}
+
+/* Profile Details */
+.profile-card p {
+    font-size: 22px;  /* 🔥 Bigger Text */
+    color: #444;
+    margin: 20px 0;  /* 🔥 Well-separated fields */
+    padding: 10px 0;
+    border-bottom: 2px solid #ddd; /* 🔥 Line separator */
+}
+
+/* Remove Border from Last Item */
+.profile-card p:last-child {
+    border-bottom: none;
+}
+
+.clock-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Adjust as needed */
+}
+.copy-tooltip {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: black;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.subordinate-card {
+    background-color: lightblue;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 280px; /* Slightly wider for buttons */
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    width: 90%;
+    display: flex; /* Align buttons horizontally */
+    justify-content: start; 
+    flex-direction:column;/* Space them evenly */
+    gap: 10px; /* Add space between buttons */
+    flex-wrap: wrap;
+    margin: 5px auto;
+}
+
+/* Bigger Name Font */
+.subordinate-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.4em; /* Increased font size */
+}
+
+/* Button Container (Flex for horizontal alignment) */
+/* Button Container */
+.button-group{
+    display: flex;
+    justify-content: space-evenly; 
+    flex-wrap: wrap; 
+    gap: 10px; 
+}
+
+.button-group button {
+    flex: 1 1 auto;  /* ✅ Allows buttons to shrink and fit properly */
+    min-width: 100px; /* ✅ Ensures a minimum button width */
+    padding: 8px 12px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Button Styling */
+.subordinate-card button {
+    flex: 1; /* Equal width for all buttons */
+    padding: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    white-space: nowrap; 
+    margin: 0 6px;/* Prevents text from wrapping */
+}
+
+/* Profile Button (Blue) */
+.profile-btn {
+    background-color: dodgerblue;
+    color: white;
+}
+
+.profile-btn:hover {
+    background-color: navy;
+}
+
+/* Reports Button (Green) */
+.reports-btn {
+    background-color: green;
+    color: white;
+}
+
+.reports-btn:hover {
+    background-color: darkgreen;
+}
+
+/* Subordinates Button (Red) */
+.subordinates-btn {
+    background-color: crimson;
+    color: white;
+}
+
+.subordinates-btn:hover {
+    background-color: darkred;
+}
+
+.leaflet-control-zoom {
+    z-index: 500 !important;  /* Reduce priority so menu stays on top */
+}
+
+@media (max-width: 768px) {
+    .row, .container {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    h1 {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden;
+    }
+
+    #menu {
+        position: fixed !important;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        background: #333;
+        padding: 0 !important;
+        z-index: 1000 !important;
+        padding-bottom: 0% !important;
+    }
+
+    .menu-item {
+        flex-grow: 1;
+        text-align: center;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .col-md-1 {
+        width: 100% !important; /* Override Bootstrap width */
+    }
+
+    .col-md-11 {
+        width: 100vw !important; /* Full viewport width */
+        max-width: 100vw !important;
+        flex-grow: 1;
+    }
+    
+    #right-side {
+        width: 100% !important;
+        flex-grow: 1;/* To prevent menu overlap */
+    }
+    .col-md-7 {
+        padding-bottom: 10px !important; /* Space for fixed menu */
+    }
+
+    #sub-right {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .parent,.content {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    #welcomeDiv {
+        min-height: 100vh;
+    }
+
+    #map {
+        z-index: 500 !important;
+    }
+
+    .subordinate-card{
+        width: 100% !important;
+    }
+}
+
+
+#right-side table {
+    margin-bottom: 20px; /* Adds spacing between reports */
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#right-side table td, 
+#right-side table th {
+    padding: 10px; /* Add spacing inside cells */
+    border: 1px solid #ddd;
+}
+
+#right-side table th {
+    background-color: #f4f4f4; /* Light gray background for headers */
+}
