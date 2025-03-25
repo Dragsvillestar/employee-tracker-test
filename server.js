@@ -4,7 +4,7 @@ const path = require("path");
 require("dotenv").config();
 const crypto = require("crypto"); 
 
-const serviceAccount = require("./firebase-admin-key.json");
+const serviceAccount = require(process.env.FIREBASE_KEY);
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
