@@ -269,7 +269,9 @@ async function fetchClockEvents(userId,username) {
     }
 }
 
-function downloadCSV(username) {
+const { Filesystem } = Capacitor.Plugins;
+
+async function downloadCSV(username) {
     if (!window.fetchedEvents || window.fetchedEvents.length === 0) {
         alert("No data to download.");
         return;
@@ -299,17 +301,32 @@ function downloadCSV(username) {
         csvContent += row + "\n";
     });
 
-    // Create a Blob and download it as a file
-    const blob = new Blob([csvContent], { type: "text/csv" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "clock_events.csv";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    try {
+        // Save the file using Capacitor Filesystem
+        const fileName = `clock_events_${Date.now()}.csv`;
+
+        await Filesystem.writeFile({
+            path: fileName,  // Save with a unique name
+            data: csvContent, // FIX: Changed from csvData to csvContent
+            directory: "DOCUMENTS",  // Equivalent to Directory.Documents
+            encoding: "utf8",        // Equivalent to Encoding.UTF8
+        });
+
+        alert(`✅ CSV saved as: ${fileName} `);
+    } catch (error) {
+        console.error("❌ Error saving file:", error);
+        alert("Failed to save file.");
+    }
 }
 
-
+async function requestPermissions() {
+    try {
+        const permissionStatus = await Filesystem.requestPermissions();
+        console.log("🛑 Permissions status:", permissionStatus);
+    } catch (error) {
+        console.error("❌ Error requesting permissions:", error);
+    }
+}
 
 document.getElementById("myReport").addEventListener("click", fetchClockEvents);
 
@@ -483,6 +500,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("❌ Logout button not found! Check HTML.");
     }
 
+    requestPermissions();
     fetchLastClocking(userId);
     initMapAndFetchLocation();
     updateClockButton();
