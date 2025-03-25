@@ -275,7 +275,7 @@ body,html{
     }
 
     #welcomeDiv {
-        min-height: 900px !important;
+        min-height: 850px;
     }
 
     #map {

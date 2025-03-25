@@ -115,55 +115,9 @@ async function checkRole() {
     }
 }*/
 
-const signUp = () => {
-    const firstName = document.getElementById("signup-firstname").value.trim();
-    const lastName = document.getElementById("signup-lastname").value.trim();
-    const fullName = `${firstName} ${lastName}`;
-    const email = document.getElementById("signup-email").value.trim(); 
-    const company = document.getElementById("signup-company").value.trim();    
-    const password = document.getElementById("signup-password").value.trim();
-
-    console.log(firstName, lastName, fullName, company, email, registrarName);
-
-    fetch("/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            creatorID,  // ✅ Registrar's ID
-            fullName,   // ✅ Full name of the new user
-            role: signUpRole, 
-            email,
-            company,
-            password,
-            registrarName
-        }),
-    })
-    .then(response => {
-        console.log("🔄 Response Status:", response.status);
-        return response.json();
-    })
-    .then(data => {
-        if (!data.success) {
-            throw new Error(data.error || "Registration failed");
-        }
-
-        console.log("✅ User registered successfully:", data);
-        document.getElementById("reg-form").style.display = "none";
-        document.getElementById("idDispayDiv").style.display = "block";
-        document.getElementById("checkRole-errorMsg").textContent = "Sign-up successful! Copy the ID above and log in with it";        
-        document.getElementById("customId").value = data.userID;
-        document.getElementById("customId").setAttribute("readonly", true);
-        document.getElementById("loginSwitch").textContent = "Go to Login";
-    })
-    .catch(error => {
-        console.error("❌ Sign-up error:", error.message);
-        document.getElementById("checkRole-errorMsg").textContent = error.message;
-        alert("Error: " + error.message);
-    });
-};
 // 🔹 LOGIN FUNCTION
 const login = async () => {
-    const customID = document.getElementById("login-id").value;
+    const customID = document.getElementById("login-id").value.trim();
     const errorMessage = document.getElementById("error-message");
 
     try {
@@ -215,36 +169,3 @@ async function firebaseLogin(customToken, path) {
     }
 }
 
-// 🟢 MODAL TOGGLE FUNCTIONS
-function showSignUp() {
-    document.getElementById("login-modal").style.display = "none";
-    document.getElementById("signup-modal").style.display = "block";
-    document.getElementById("checkroleDiv").style.display = "block";    
-    document.getElementById("checkResultDiv").style.display = "none";
-    document.getElementById("reg-form").style.display = "none";
-    document.getElementById("idDispayDiv").style.display = "none";
-
-}
-
-function showLogin() {
-    window.location.href = "/";
-}
-
-function copyCustomId() {
-    const customIdInput = document.getElementById("customId");
-    const copyMessage = document.getElementById("copyMessage");
-
-    navigator.clipboard.writeText(customIdInput.value).then(() => {
-        copyMessage.style.display = "inline-block"; // Show "Copied!" message
-        setTimeout(() => {
-            copyMessage.style.display = "none"; // Hide after 1.5s
-        }, 1500);
-    }).catch(err => {
-        console.error("Failed to copy: ", err);
-    });
-}
-
-document.getElementById("submit-reg").addEventListener("click", (e) => {
-    e.preventDefault();
-    signUp();
-} );
