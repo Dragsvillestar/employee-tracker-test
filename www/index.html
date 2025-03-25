@@ -12,14 +12,21 @@
 <body>
 
     <div style="width: 100%; height: 100%;max-width: 100%;max-width: 100%;">
-        <nav class="navbar bg-body-tertiary p-0" style="height: fit-content;">
-            <div class="container-fluid d-flex justify-content-center text-center" style="height: fit-content;"> 
-                <img class="img-fluid" src="../images/Sname-Loggo.png" alt="sname tech logo" style="max-height: 280px; width: auto;">
+        <nav class="navbar bg-body-tertiary p-0">
+            <div class="container-fluid">
+                <div class="row w-100 align-items-center text-center">
+                    <div class="col-md-4 d-flex justify-content-center">
+                        <img class="img-fluid" src="../images/Sname-Loggo.png" alt="sname tech logo" style="height: 100%; width: auto;margin: auto;"">
+                    </div>
+                    <div class="col-md-5 d-flex justify-content-center">
+                        <span class="navbar-brand text-start">Employee Tracker</span>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
             </div>
         </nav>      
     
         <div>
-            <p class="fw-bold text-center f-6 mb-0">Worker app</p>
             <div class="p-4" id="login-modal">
                 <h2>Login</h2>
                 <input class="form-control m-3" id="login-id" placeholder="Enter ID" required>
@@ -27,7 +34,56 @@
                     <button onclick="login()" style="border-radius: 10px; width: 80%;">Login</button>
                 </div>            
                 <p id="error-message"></p>
-            </div>                       
+                <p class="switch" onclick="showSignUp()">Don't have an account? <span>Sign up</span></p>
+            </div> 
+            <div id="signup-modal" style="display: none;" class="p-4">
+                <h2>Sign Up</h2>
+                <div>
+                    <div id ="checkroleDiv">
+                        <p class="text-muted">You can only be registered by an Admin or Manager</p>                
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="registrarId" placeholder="Registrar's ID">
+                            <button class="btn btn-primary m-3" type="button" onclick="checkRole()">Next <span>&#8594;</span></button>
+                        </div>
+                    </div>                    
+                    <div id ="checkResultDiv" style="display: none;">
+                        <p><strong>Name: </strong><span id="checkName"></span></p>
+                        <p><strong>Role: </strong><span id="checkRole"></span></p>
+                        <div id ="levelDiv">
+                            <label for="reg-select" class="text-muted">Who would you like to register</label>
+                            <select name="" id="reg-select">
+                                <option value="admin" id="adminOpt">Admin</option>
+                                <option value="manager" id="managerOpt">Manager</option>
+                                <option value="worker" id="workerOpt">Worker</option>
+                            </select>
+                        <button class="btn btn-primary m-3" type="button" onclick="levelSelect()">Next <span>&#8594;</span></button>
+                        </div>                        
+                    </div>  
+                    <div id="reg-form" style="display: none;">
+                        <p class="text-muted">Please provide the requested info for the newly registering</p>
+                        <form id="registration-form">
+                            <p class="text-muted" id="selected-level"></p>
+                            <input type="text" class="form-control mb-2" id="signup-firstname" placeholder="First Name" required>
+                            <input type="text" class="form-control mb-2" id="signup-lastname" placeholder="Last Name" required>
+                            <input type="email" class="form-control mb-2" id="signup-email" placeholder="Email" required>
+                            <input type="tel" class="form-control mb-2" id="signup-company" placeholder="Company Name" required>
+                            <input type="password" class="form-control mb-2" id="signup-password" placeholder="Password" required>
+                            <input type="text" class="form-control mb-2" id="supervisorId" placeholder="Supervising Manager ID" style="display: none;">
+                            <button type="submit" class="btn btn-primary w-100" id="submit-reg">Register</button>
+                        </form>
+                    </div>                
+
+                    <div id="idDispayDiv" class="position-relative  m-2" style="display: none;"> 
+                        <input type="text" class="form-control pe-5" id="customId" placeholder="Custom ID">
+                        <span class="position-absolute end-0 top-50 translate-middle-y me-3" onclick="copyCustomId()" style="cursor: pointer;">
+                            <i class="fa-regular fa-copy"></i> 
+                        </span>
+                        <span id="copyMessage" class="copy-tooltip" style="display: none;">Copied!</span>
+                    </div>                      
+                    <p id="checkRole-errorMsg" class="text-center"></p>                  
+                    <p class="switch text-center" id="loginSwitch" onclick="showLogin()">Already have an account? <span>Login</span></p>
+                </div>
+            </div>            
         </div> 
     </div>
         
